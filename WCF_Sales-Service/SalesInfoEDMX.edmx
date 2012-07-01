@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SalesInfoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="SalesInfoModelStoreContainer">
+          <EntitySet Name="BillMaster" EntityType="SalesInfoModel.Store.BillMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DealerMaster" EntityType="SalesInfoModel.Store.DealerMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProductMaster" EntityType="SalesInfoModel.Store.ProductMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RowOrderMaster" EntityType="SalesInfoModel.Store.RowOrderMaster" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_BillMaster_DealerMaster" Association="SalesInfoModel.Store.FK_BillMaster_DealerMaster">
+            <End Role="DealerMaster" EntitySet="DealerMaster" />
+            <End Role="BillMaster" EntitySet="BillMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RowOrderMaster_ProductMaster" Association="SalesInfoModel.Store.FK_RowOrderMaster_ProductMaster">
+            <End Role="ProductMaster" EntitySet="ProductMaster" />
+            <End Role="RowOrderMaster" EntitySet="RowOrderMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RowOrderMaster_RowOrderMaster" Association="SalesInfoModel.Store.FK_RowOrderMaster_RowOrderMaster">
+            <End Role="DealerMaster" EntitySet="DealerMaster" />
+            <End Role="RowOrderMaster" EntitySet="RowOrderMaster" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BillMaster">
+          <Key>
+            <PropertyRef Name="InvoiceNo" />
+          </Key>
+          <Property Name="InvoiceNo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DealerID" Type="int" Nullable="false" />
+          <Property Name="TotalBill" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DealerMaster">
+          <Key>
+            <PropertyRef Name="DealerID" />
+          </Key>
+          <Property Name="DealerID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DealerName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductMaster">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="UnitPrice" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RowOrderMaster">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DealerID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="OrderPrice" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BillMaster_DealerMaster">
+          <End Role="DealerMaster" Type="SalesInfoModel.Store.DealerMaster" Multiplicity="1" />
+          <End Role="BillMaster" Type="SalesInfoModel.Store.BillMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealerMaster">
+              <PropertyRef Name="DealerID" />
+            </Principal>
+            <Dependent Role="BillMaster">
+              <PropertyRef Name="DealerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RowOrderMaster_ProductMaster">
+          <End Role="ProductMaster" Type="SalesInfoModel.Store.ProductMaster" Multiplicity="1" />
+          <End Role="RowOrderMaster" Type="SalesInfoModel.Store.RowOrderMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductMaster">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="RowOrderMaster">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RowOrderMaster_RowOrderMaster">
+          <End Role="DealerMaster" Type="SalesInfoModel.Store.DealerMaster" Multiplicity="1" />
+          <End Role="RowOrderMaster" Type="SalesInfoModel.Store.RowOrderMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealerMaster">
+              <PropertyRef Name="DealerID" />
+            </Principal>
+            <Dependent Role="RowOrderMaster">
+              <PropertyRef Name="DealerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SalesInfoModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SalesInfoEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="BillMasters" EntityType="SalesInfoModel.BillMaster" />
+          <EntitySet Name="DealerMasters" EntityType="SalesInfoModel.DealerMaster" />
+          <EntitySet Name="ProductMasters" EntityType="SalesInfoModel.ProductMaster" />
+          <EntitySet Name="RowOrderMasters" EntityType="SalesInfoModel.RowOrderMaster" />
+          <AssociationSet Name="FK_BillMaster_DealerMaster" Association="SalesInfoModel.FK_BillMaster_DealerMaster">
+            <End Role="DealerMaster" EntitySet="DealerMasters" />
+            <End Role="BillMaster" EntitySet="BillMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RowOrderMaster_RowOrderMaster" Association="SalesInfoModel.FK_RowOrderMaster_RowOrderMaster">
+            <End Role="DealerMaster" EntitySet="DealerMasters" />
+            <End Role="RowOrderMaster" EntitySet="RowOrderMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RowOrderMaster_ProductMaster" Association="SalesInfoModel.FK_RowOrderMaster_ProductMaster">
+            <End Role="ProductMaster" EntitySet="ProductMasters" />
+            <End Role="RowOrderMaster" EntitySet="RowOrderMasters" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BillMaster">
+          <Key>
+            <PropertyRef Name="InvoiceNo" />
+          </Key>
+          <Property Name="InvoiceNo" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DealerID" Type="Int32" Nullable="false" />
+          <Property Name="TotalBill" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DealerMaster" Relationship="SalesInfoModel.FK_BillMaster_DealerMaster" FromRole="BillMaster" ToRole="DealerMaster" />
+        </EntityType>
+        <EntityType Name="DealerMaster">
+          <Key>
+            <PropertyRef Name="DealerID" />
+          </Key>
+          <Property Name="DealerID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DealerName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="BillMasters" Relationship="SalesInfoModel.FK_BillMaster_DealerMaster" FromRole="DealerMaster" ToRole="BillMaster" />
+          <NavigationProperty Name="RowOrderMasters" Relationship="SalesInfoModel.FK_RowOrderMaster_RowOrderMaster" FromRole="DealerMaster" ToRole="RowOrderMaster" />
+        </EntityType>
+        <EntityType Name="ProductMaster">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="UnitPrice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RowOrderMasters" Relationship="SalesInfoModel.FK_RowOrderMaster_ProductMaster" FromRole="ProductMaster" ToRole="RowOrderMaster" />
+        </EntityType>
+        <EntityType Name="RowOrderMaster">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DealerID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="OrderPrice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DealerMaster" Relationship="SalesInfoModel.FK_RowOrderMaster_RowOrderMaster" FromRole="RowOrderMaster" ToRole="DealerMaster" />
+          <NavigationProperty Name="ProductMaster" Relationship="SalesInfoModel.FK_RowOrderMaster_ProductMaster" FromRole="RowOrderMaster" ToRole="ProductMaster" />
+        </EntityType>
+        <Association Name="FK_BillMaster_DealerMaster">
+          <End Role="DealerMaster" Type="SalesInfoModel.DealerMaster" Multiplicity="1" />
+          <End Role="BillMaster" Type="SalesInfoModel.BillMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealerMaster">
+              <PropertyRef Name="DealerID" />
+            </Principal>
+            <Dependent Role="BillMaster">
+              <PropertyRef Name="DealerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RowOrderMaster_RowOrderMaster">
+          <End Role="DealerMaster" Type="SalesInfoModel.DealerMaster" Multiplicity="1" />
+          <End Role="RowOrderMaster" Type="SalesInfoModel.RowOrderMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealerMaster">
+              <PropertyRef Name="DealerID" />
+            </Principal>
+            <Dependent Role="RowOrderMaster">
+              <PropertyRef Name="DealerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RowOrderMaster_ProductMaster">
+          <End Role="ProductMaster" Type="SalesInfoModel.ProductMaster" Multiplicity="1" />
+          <End Role="RowOrderMaster" Type="SalesInfoModel.RowOrderMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductMaster">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="RowOrderMaster">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SalesInfoModelStoreContainer" CdmEntityContainer="SalesInfoEntities">
+          <EntitySetMapping Name="BillMasters">
+            <EntityTypeMapping TypeName="SalesInfoModel.BillMaster">
+              <MappingFragment StoreEntitySet="BillMaster">
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+                <ScalarProperty Name="TotalBill" ColumnName="TotalBill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealerMasters">
+            <EntityTypeMapping TypeName="SalesInfoModel.DealerMaster">
+              <MappingFragment StoreEntitySet="DealerMaster">
+                <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+                <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductMasters">
+            <EntityTypeMapping TypeName="SalesInfoModel.ProductMaster">
+              <MappingFragment StoreEntitySet="ProductMaster">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RowOrderMasters">
+            <EntityTypeMapping TypeName="SalesInfoModel.RowOrderMaster">
+              <MappingFragment StoreEntitySet="RowOrderMaster">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OrderPrice" ColumnName="OrderPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

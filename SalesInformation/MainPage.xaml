@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="SalesInformation.MainPage"
+    IsTabStop="false"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SalesInformation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="124*"/>
+            <RowDefinition Height="579*"/>
+        </Grid.RowDefinitions>
+        <TextBlock TextWrapping="Wrap" FontSize="48" FontStretch="Expanded" Foreground="#FFB5E6C7" TextAlignment="Center">
+        	<Run Text="Invoice "/>
+        	<Run Text="Generator"/>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="20,27,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Invoice No" VerticalAlignment="Top" Height="30" Width="354" FontSize="20" FontWeight="Bold"/>
+        <TextBox x:Name="txtInvoiceno" HorizontalAlignment="Left" Margin="472,27,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="151"/>
+        <TextBlock HorizontalAlignment="Left" Margin="20,84,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Dealer Name" VerticalAlignment="Top" Height="30" Width="354" FontSize="20" FontWeight="Bold"/>
+        <ComboBox x:Name="cmbDealerName" HorizontalAlignment="Left" Margin="472,84,0,0" Grid.Row="1" VerticalAlignment="Top" Width="371"/>
+        
+        <TextBlock HorizontalAlignment="Left" Margin="45,30,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Product wise Items Details:" VerticalAlignment="Top" FontSize="20" Width="281"/>
+        <TextBlock HorizontalAlignment="Left" Margin="45,66,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Product Name" VerticalAlignment="Top" FontSize="20" Width="140" RenderTransformOrigin="0.479999989271164,2.08299994468689"/>
+        <TextBlock HorizontalAlignment="Left" Margin="234,67,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Quantity" VerticalAlignment="Top" FontSize="20" Width="83" RenderTransformOrigin="0.479999989271164,2.08299994468689"/>
+        <TextBlock HorizontalAlignment="Left" Margin="366,67,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Unit Price" VerticalAlignment="Top" FontSize="20" Width="97" RenderTransformOrigin="0.479999989271164,2.08299994468689"/>
+        <TextBlock HorizontalAlignment="Left" Margin="487,66,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Bill" VerticalAlignment="Top" FontSize="20" Width="97" RenderTransformOrigin="0.479999989271164,2.08299994468689"/>
+        <Button x:Name="btnAdd" Content="+" HorizontalAlignment="Left" Margin="623,90,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="20" Click="btnAdd_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="623,156,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Total Invoice Value" VerticalAlignment="Top" Height="20" Width="150" FontSize="16"/>
+        <TextBox x:Name="txtTotalBill" HorizontalAlignment="Left" Margin="623,193,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="190"/>
+        <Button x:Name="btnSaveInvoice" Content="Save Invoice" HorizontalAlignment="Left" Margin="623,230,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="20" Width="190" Click="btnSaveInvoice_Click"/>
+        <ListBox x:Name="lstContainer"
+                 HorizontalAlignment="Left"
+                 Height="337" Margin="45,105,0,0" 
+                 Grid.Row="2" VerticalAlignment="Top" Width="539"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto" />
+        <TextBlock x:Name="txtError" 
+                   HorizontalAlignment="Left" Margin="670,311,0,0" 
+                   Grid.Row="2"   Text="Error:" 
+                   VerticalAlignment="Top" FontSize="12"
+                    Width="300" TextWrapping="Wrap"/>
+
+    </Grid>
+</Page>

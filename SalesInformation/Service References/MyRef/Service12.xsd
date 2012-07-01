@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WCF_Sales_Service" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCF_Sales_Service" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8090/WCF_Sales-Service/Service1.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+  <xs:complexType name="ArrayOfProductMaster">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductMaster" nillable="true" type="tns:ProductMaster" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProductMaster" nillable="true" type="tns:ArrayOfProductMaster" />
+  <xs:complexType name="ProductMaster">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q1:EntityObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ProductID" type="xs:int" />
+          <xs:element minOccurs="0" name="ProductName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RowOrderMasters" nillable="true" type="tns:ArrayOfRowOrderMaster" />
+          <xs:element minOccurs="0" name="UnitPrice" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ProductMaster" nillable="true" type="tns:ProductMaster" />
+  <xs:complexType name="ArrayOfRowOrderMaster">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RowOrderMaster" nillable="true" type="tns:RowOrderMaster" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRowOrderMaster" nillable="true" type="tns:ArrayOfRowOrderMaster" />
+  <xs:complexType name="RowOrderMaster">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q2:EntityObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DealerID" type="xs:int" />
+          <xs:element minOccurs="0" name="DealerMaster" nillable="true" type="tns:DealerMaster" />
+          <xs:element minOccurs="0" name="DealerMasterReference" nillable="true" type="q2:EntityReferenceOfDealerMastersCCKwiqE" />
+          <xs:element minOccurs="0" name="OrderID" type="xs:int" />
+          <xs:element minOccurs="0" name="OrderPrice" type="xs:int" />
+          <xs:element minOccurs="0" name="ProductID" type="xs:int" />
+          <xs:element minOccurs="0" name="ProductMaster" nillable="true" type="tns:ProductMaster" />
+          <xs:element minOccurs="0" name="ProductMasterReference" nillable="true" type="q2:EntityReferenceOfProductMastersCCKwiqE" />
+          <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RowOrderMaster" nillable="true" type="tns:RowOrderMaster" />
+  <xs:complexType name="DealerMaster">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q3:EntityObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BillMasters" nillable="true" type="tns:ArrayOfBillMaster" />
+          <xs:element minOccurs="0" name="DealerID" type="xs:int" />
+          <xs:element minOccurs="0" name="DealerName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RowOrderMasters" nillable="true" type="tns:ArrayOfRowOrderMaster" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DealerMaster" nillable="true" type="tns:DealerMaster" />
+  <xs:complexType name="ArrayOfBillMaster">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BillMaster" nillable="true" type="tns:BillMaster" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBillMaster" nillable="true" type="tns:ArrayOfBillMaster" />
+  <xs:complexType name="BillMaster">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q4:EntityObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DealerID" type="xs:int" />
+          <xs:element minOccurs="0" name="DealerMaster" nillable="true" type="tns:DealerMaster" />
+          <xs:element minOccurs="0" name="DealerMasterReference" nillable="true" type="q4:EntityReferenceOfDealerMastersCCKwiqE" />
+          <xs:element minOccurs="0" name="InvoiceNo" type="xs:int" />
+          <xs:element minOccurs="0" name="TotalBill" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BillMaster" nillable="true" type="tns:BillMaster" />
+  <xs:complexType name="ArrayOfDealerMaster">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DealerMaster" nillable="true" type="tns:DealerMaster" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDealerMaster" nillable="true" type="tns:ArrayOfDealerMaster" />
+</xs:schema>
